@@ -1,9 +1,9 @@
 # 🛠️ PicBank Infrastructure as Code  
 
-![GitHub repo size](https://img.shields.io/github/repo-size/antoniocesarlopes/picbank-infra)
-![GitHub last commit](https://img.shields.io/github/last-commit/antoniocesarlopes/picbank-infra)
-![GitHub issues](https://img.shields.io/github/issues/antoniocesarlopes/picbank-infra)
-![GitHub license](https://img.shields.io/github/license/antoniocesarlopes/picbank-infra)
+![GitHub repo size](https://img.shields.io/github/repo-size/antoniocesarlopes/picbank-iac)
+![GitHub last commit](https://img.shields.io/github/last-commit/antoniocesarlopes/picbank-iac)
+![GitHub issues](https://img.shields.io/github/issues/antoniocesarlopes/picbank-iac)
+![GitHub license](https://img.shields.io/github/license/antoniocesarlopes/picbank-iac)
 
 This repository contains the **Infrastructure as Code (IaC)** setup for the **PicBank** project.  
 It provisions AWS resources using **Terraform** and **Ansible**, ensuring **scalability, security, and automation**.
