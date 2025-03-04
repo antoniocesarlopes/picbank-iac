@@ -1,0 +1,39 @@
+- name: Configurar S3 e DynamoDB para Terraform
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+
+    - name: Criar Bucket S3 para o estado do Terraform
+      amazon.aws.s3_bucket:
+        name: "picbank-terraform-state"
+        state: present
+        region: "us-east-1"
+        versioning: yes
+        encryption:
+          - rule:
+              apply_server_side_encryption_by_default:
+                sse_algorithm: AES256
+      register: s3_result
+
+    - name: Exibir informações do Bucket S3
+      debug:
+        msg: "Bucket S3 criado: {{ s3_result }}"
+
+    - name: Criar Tabela DynamoDB para locks do Terraform
+      amazon.aws.dynamodb_table:
+        name: "picbank-terraform-lock"
+        state: present
+        region: "us-east-1"
+        attribute_definitions:
+          - attribute_name: LockID
+            attribute_type: S
+        key_schema:
+          - attribute_name: LockID
+            key_type: HASH
+        billing_mode: PAY_PER_REQUEST
+      register: dynamodb_result
+
+    - name: Exibir informações da Tabela DynamoDB
+      debug:
+        msg: "Tabela DynamoDB criada: {{ dynamodb_result }}"
