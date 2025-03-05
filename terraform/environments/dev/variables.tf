@@ -1,49 +1,39 @@
-
 variable "aws_region" {
   description = "Região da AWS onde os recursos serão provisionados"
   type        = string
-  default     = "us-east-1" 
+  default     = "us-east-1"
 }
 
-# Nome do projeto
 variable "project" {
   description = "Nome do projeto"
   type        = string
   default     = "picbank"
 }
 
-# Bloco CIDR da VPC
 variable "cidr_block" {
-  description = "CIDR block for the VPC"
+  description = "Bloco CIDR para a VPC"
   type        = string
   default     = "10.0.0.0/16"
 }
 
-# Lista de subnets públicas
 variable "public_subnets" {
-  description = "Lista de subnets públicas"
+  description = "Lista de blocos CIDR para as subnets públicas"
   type        = list(string)
-  default     = ["10.0.1.0/24", "10.0.2.0/24"]
+}
+
+variable "private_subnets" {
+  description = "Lista de blocos CIDR para as subnets privadas"
+  type        = list(string)
 }
 
 variable "environment" {
-  description = "The environment for the ECS service (dev or prod)"
-  type        = string
-}
-
-variable "image_url" {
-  description = "URL da imagem do serviço no ECR"
+  description = "O ambiente onde os recursos serão implantados (dev ou prod)"
   type        = string
 }
 
 variable "execution_role_arn" {
   description = "ARN do IAM Role de execução do ECS"
   type        = string
-}
-
-variable "subnet_ids" {
-  description = "Lista de subnets onde os containers do ECS serão executados"
-  type        = list(string)
 }
 
 variable "bucket_terraform_state" {
@@ -67,3 +57,7 @@ variable "ses_sender_email" {
   type        = string
 }
 
+variable "service_port" {
+  description = "Porta onde o serviço estará rodando (ex: 8080)"
+  type        = number
+}

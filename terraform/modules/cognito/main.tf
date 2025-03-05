@@ -25,7 +25,7 @@ resource "aws_cognito_user_pool" "picbank_user_pool" {
     name                     = "document"
     attribute_data_type      = "String"
     mutable                  = true
-    required                 = true
+    required                 = false
     string_attribute_constraints {
       min_length = 11
       max_length = 14

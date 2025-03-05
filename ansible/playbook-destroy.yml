@@ -1,0 +1,50 @@
+- name: Remover recursos S3 e DynamoDB criados para Terraform
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Excluir todas as versões dos objetos no bucket S3 usando AWS CLI
+      shell: |
+        aws s3api list-object-versions \
+          --bucket picbank-terraform-state \
+          --region us-east-1 \
+          --query 'Versions[].{Key:Key,VersionId:VersionId}' \
+          --output json | jq -c '.[]' | while read -r object; do
+            key=$(echo "$object" | jq -r '.Key')
+            version=$(echo "$object" | jq -r '.VersionId')
+            aws s3api delete-object \
+              --bucket picbank-terraform-state \
+              --region us-east-1 \
+              --key "$key" \
+              --version-id "$version"
+          done
+      args:
+        executable: /bin/bash
+      register: s3_objects_deleted
+
+    - name: Exibir resultado da exclusão dos objetos do bucket S3
+      debug:
+        msg: "Objetos e versões excluídos do bucket S3: {{ s3_objects_deleted }}"
+
+    - name: Excluir Bucket S3 do Terraform
+      amazon.aws.s3_bucket:
+        name: "picbank-terraform-state"
+        state: absent
+        region: "us-east-1"
+      register: s3_delete_result
+
+    - name: Exibir resultado da exclusão do Bucket S3
+      debug:
+        msg: "Bucket S3 excluído: {{ s3_delete_result }}"
+
+    - name: Excluir Tabela DynamoDB do Terraform
+      community.aws.dynamodb_table:
+        name: "picbank-terraform-lock"
+        state: absent
+        region: "us-east-1"
+      register: dynamodb_delete_result
+
+    - name: Exibir resultado da exclusão da Tabela DynamoDB
+      debug:
+        msg: "Tabela DynamoDB excluída: {{ dynamodb_delete_result }}"

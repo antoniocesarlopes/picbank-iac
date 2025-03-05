@@ -53,7 +53,6 @@ resource "aws_ecs_task_definition" "auth_service" {
 # SERVIÇO ECS (AUTH-SERVICE)
 # ===========================
 
-# Criação do serviço ECS para rodar a Task Definition acima
 resource "aws_ecs_service" "auth_service" {
   name            = "auth-service"  # Nome do serviço
   cluster         = aws_ecs_cluster.main.id  # Associa ao cluster ECS criado
@@ -65,6 +64,7 @@ resource "aws_ecs_service" "auth_service" {
   network_configuration {
     subnets          = var.subnet_ids  # Lista de subnets onde o serviço será executado
     assign_public_ip = true  # Garante que o serviço tenha um IP público para comunicação
+    security_groups  = var.security_group_ids  # Associar os security groups aqui
   }
 
   tags = {
@@ -72,3 +72,4 @@ resource "aws_ecs_service" "auth_service" {
     Environment = var.environment  # Define o ambiente
   }
 }
+

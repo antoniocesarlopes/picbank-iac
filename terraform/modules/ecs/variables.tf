@@ -33,3 +33,7 @@ variable "environment" {
   type        = string
 }
 
+variable "security_group_ids" {
+  description = "Lista de IDs dos grupos de segurança para o serviço ECS"
+  type        = list(string)
+}
