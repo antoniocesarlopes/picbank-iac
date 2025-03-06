@@ -38,12 +38,15 @@ It includes:
 ---
 
 ## 🚀 **Features**
-✅ **Automated AWS Infrastructure Provisioning**
-✅ **Terraform State Management with S3 & DynamoDB**
-✅ **AWS Cognito for Authentication**
-✅ **AWS SQS for Asynchronous Messaging**
-✅ **AWS SES for Email Notifications**
-✅ **Infrastructure as Code (IaC) with Terraform & Ansible**
+<ul style="list-style-type: none;">
+<li>✅ Automated AWS Infrastructure Provisioning</li>
+<li>✅ Terraform State Management with S3 & DynamoDB</li>
+<li>✅ AWS Cognito for Authentication</li>
+<li>✅ AWS SQS for Asynchronous Messaging</li>
+<li>✅ AWS SES for Email Notifications</li>
+<li>✅ Infrastructure as Code (IaC) with Terraform & Ansible</li>
+</ul>
+
 ---
 
 ## **Tech Stack**
