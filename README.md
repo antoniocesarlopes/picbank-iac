@@ -148,9 +148,13 @@ cd ..
 
 ✅ Now Ansible is properly configured and ready to use!
 
+✅ This approach keeps the system clean, with no need to install Python packages globally. 😉
+
 ---
 
-### **3️⃣ Create S3 & DynamoDB for Terraform State (via Ansible)**
+## 🚀 **Provisioning the Infrastructure**
+
+### **1️⃣ Create S3 & DynamoDB for Terraform State (via Ansible)**
 ```sh
 cd ansible
 source ansible-venv/bin/activate
@@ -158,36 +162,29 @@ ansible-playbook -i hosts playbook.yml
 deactivate
 cd ..
 ```
-```
 
-✅ This approach keeps the system clean, with no need to install Python packages globally. 😉
-
----
-
-## 🚀 **Provisioning the Infrastructure**
-
-### **1️⃣ Initialize Terraform**
+### **2️⃣ Initialize Terraform**
 ```sh
 cd terraform
 terraform init
 ```
 
-### **2️⃣ Validate Configuration**
+### **3️⃣ Validate Configuration**
 ```sh
 terraform validate
 ```
 
-### **3️⃣ Plan the Infrastructure**
+### **4️⃣ Plan the Infrastructure**
 ```sh
 terraform plan -out=tfplan
 ```
 
-### **4️⃣ Apply and Create Resources**
+### **5️⃣ Apply and Create Resources**
 ```sh
 terraform apply tfplan
 ```
 
-### **5️⃣ View Outputs (Resource Information)**
+### **6️⃣ View Outputs (Resource Information)**
 ```sh
 terraform output
 ```
