@@ -165,7 +165,7 @@ cd ..
 
 ### **2️⃣ Initialize Terraform**
 ```sh
-cd terraform
+cd terraform/environments/dev
 terraform init
 ```
 
