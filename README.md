@@ -20,6 +20,7 @@ It provisions AWS resources using **Terraform** and **Ansible**, ensuring **scal
 - [🏗️ Setting Up the Environment](#-setting-up-the-environment)
 - [🚀 Provisioning the Infrastructure](#-provisioning-the-infrastructure)
 - [🧹 Destroying the Infrastructure](#-destroying-the-infrastructure)
+- [🛠️ Troubleshooting](#-troubleshooting)
 - [🤝 Contributing](#-contributing)
 - [📜 License](#-license)
 - [📞 Contact](#-contact)
@@ -189,6 +190,49 @@ cd ..
 ```
 
 ✅ Now all the infrastructure has been **removed**! 🧹
+
+---
+
+## **🛠️ Troubleshooting**
+
+### **1️⃣ Install Ansible**  
+If Ansible is not installed, the output of `ansible --version` will be:  
+```
+zsh: command not found: ansible
+```
+To install Ansible on Ubuntu:  
+```sh
+sudo apt update && sudo apt install -y ansible
+```
+If you prefer to install it via `pip` (recommended for isolated environments):  
+```sh
+pip3 install --user ansible
+```
+
+Now, check if Ansible is available:  
+```sh
+ansible --version
+```
+
+---
+
+### **2️⃣ Create a Virtual Environment for Ansible**  
+The error:
+```
+source: no such file or directory: ansible-venv/bin/activate
+```
+means that the virtual environment **does not exist** in the newly downloaded repository. You must create it before trying to activate it.
+
+Inside the `ansible/` directory, run:  
+```sh
+cd ansible
+python3 -m venv ansible-venv  # Create the virtual environment
+source ansible-venv/bin/activate  # Activate the virtual environment
+pip install -r requirements.txt  # Install Ansible dependencies
+deactivate  # Exit the virtual environment
+cd ..
+```
+Now, the command `source ansible-venv/bin/activate` will work correctly.
 
 ---
 
