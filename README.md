@@ -189,6 +189,10 @@ terraform apply tfplan
 terraform output
 ```
 
+```sh
+terraform output -json #exports in json format with sensitive data
+```
+
 ---
 
 ## 🧹 **Destroying the Infrastructure**
