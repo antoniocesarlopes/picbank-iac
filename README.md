@@ -116,7 +116,7 @@ The project provisions the following AWS resources:
 
 ## 🏗️ **Setting Up the Environment**
 
-### **1️⃣ Install Dependencies**
+### **1️⃣ Install System Dependencies**
 Ensure you have the following packages installed:
 
 - **Terraform** (`>= 1.6.0`)
@@ -134,9 +134,23 @@ python3 --version
 
 ---
 
-## 🚀 **Provisioning the Infrastructure**
+### **2️⃣ Setup Ansible Virtual Environment**
+Before running Ansible, create and configure a virtual environment to ensure all dependencies are installed correctly.
 
-### **1️⃣ Create S3 & DynamoDB for Terraform State (via Ansible)**
+```sh
+cd ansible
+python3 -m venv ansible-venv  # Create the virtual environment
+source ansible-venv/bin/activate  # Activate the virtual environment
+pip install -r requirements.txt  # Install Ansible dependencies
+deactivate  # Exit the virtual environment
+cd ..
+```
+
+✅ Now Ansible is properly configured and ready to use!
+
+---
+
+### **3️⃣ Create S3 & DynamoDB for Terraform State (via Ansible)**
 ```sh
 cd ansible
 source ansible-venv/bin/activate
@@ -144,29 +158,36 @@ ansible-playbook -i hosts playbook.yml
 deactivate
 cd ..
 ```
+```
 
-### **2️⃣ Initialize Terraform**
+✅ This approach keeps the system clean, with no need to install Python packages globally. 😉
+
+---
+
+## 🚀 **Provisioning the Infrastructure**
+
+### **1️⃣ Initialize Terraform**
 ```sh
 cd terraform
 terraform init
 ```
 
-### **3️⃣ Validate Configuration**
+### **2️⃣ Validate Configuration**
 ```sh
 terraform validate
 ```
 
-### **4️⃣ Plan the Infrastructure**
+### **3️⃣ Plan the Infrastructure**
 ```sh
 terraform plan -out=tfplan
 ```
 
-### **5️⃣ Apply and Create Resources**
+### **4️⃣ Apply and Create Resources**
 ```sh
 terraform apply tfplan
 ```
 
-### **6️⃣ View Outputs (Resource Information)**
+### **5️⃣ View Outputs (Resource Information)**
 ```sh
 terraform output
 ```
