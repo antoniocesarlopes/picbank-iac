@@ -14,13 +14,13 @@ It provisions AWS resources using **Terraform** and **Ansible**, ensuring **scal
 ## 📌 **Table of Contents**
 - [📜 About the Project](#-about-the-project)
 - [🚀 Features](#-features)
-- [🛠️ Tech Stack](#-tech-stack)
+- [🛠️ Tech Stack](#%EF%B8%8F-tech-stack)
 - [📂 Project Structure](#-project-structure)
-- [⚙️ Infrastructure Details](#-infrastructure-details)
-- [🏗️ Setting Up the Environment](#-setting-up-the-environment)
+- [⚙️ Infrastructure Details](#%EF%B8%8F-infrastructure-details)
+- [🏗️ Setting Up the Environment](#%EF%B8%8F-setting-up-the-environment)
 - [🚀 Provisioning the Infrastructure](#-provisioning-the-infrastructure)
 - [🧹 Destroying the Infrastructure](#-destroying-the-infrastructure)
-- [🛠️ Troubleshooting](#-troubleshooting)
+- [🛠️ Troubleshooting](#%EF%B8%8F-troubleshooting)
 - [🤝 Contributing](#-contributing)
 - [📜 License](#-license)
 - [📞 Contact](#-contact)
@@ -50,7 +50,7 @@ It includes:
 
 ---
 
-## **Tech Stack**
+## 🛠️ **Tech Stack**
 | **Technology** | **Description** |
 |--------------|----------------|
 | **Terraform** | Infrastructure as Code (IaC) |
