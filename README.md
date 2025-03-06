@@ -8,6 +8,7 @@
 This repository contains the **Infrastructure as Code (IaC)** setup for the **PicBank** project.
 It provisions AWS resources using **Terraform** and **Ansible**, ensuring **scalability, security, and automation**.
 
+![image](logo.jpg)
 ---
 
 ## 📌 **Table of Contents**
@@ -45,7 +46,7 @@ It includes:
 ✅ **Infrastructure as Code (IaC) with Terraform & Ansible**
 ---
 
-## 🛠️ **Tech Stack**
+## **Tech Stack**
 | **Technology** | **Description** |
 |--------------|----------------|
 | **Terraform** | Infrastructure as Code (IaC) |
