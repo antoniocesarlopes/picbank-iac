@@ -1,17 +1,19 @@
-# 🛠️ PicBank Infrastructure as Code  
+```markdown
+# 🛠️ PicBank Infrastructure as Code
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/antoniocesarlopes/picbank-iac)
 ![GitHub last commit](https://img.shields.io/github/last-commit/antoniocesarlopes/picbank-iac)
 ![GitHub issues](https://img.shields.io/github/issues/antoniocesarlopes/picbank-iac)
 ![GitHub license](https://img.shields.io/github/license/antoniocesarlopes/picbank-iac)
 
-This repository contains the **Infrastructure as Code (IaC)** setup for the **PicBank** project.  
+This repository contains the **Infrastructure as Code (IaC)** setup for the **PicBank** project.
 It provisions AWS resources using **Terraform** and **Ansible**, ensuring **scalability, security, and automation**.
 
 ---
 
-## 📌 **Table of Contents** - [📜 About the Project](#-about-the-project)  
-- [🚀 Features](#-features)  
+## 📌 **Table of Contents**
+- [📜 About the Project](#-about-the-project)
+- [🚀 Features](#-features)
 - [🛠️ Tech Stack](#-tech-stack)
 - [📂 Project Structure](#-project-structure)
 - [⚙️ Infrastructure Details](#-infrastructure-details)
@@ -24,7 +26,8 @@ It provisions AWS resources using **Terraform** and **Ansible**, ensuring **scal
 
 ---
 
-## 📜 **About the Project** This project automates the provisioning of cloud infrastructure for **PicBank** using **Terraform** and **Ansible**.  
+## 📜 **About the Project**
+This project automates the provisioning of cloud infrastructure for **PicBank** using **Terraform** and **Ansible**.
 It includes:
 - **AWS Cognito** for authentication.
 - **AWS SQS** for messaging.
@@ -34,16 +37,24 @@ It includes:
 
 ---
 
-## 🚀 **Features** ✅ **Automated AWS Infrastructure Provisioning** ✅ **Terraform State Management with S3 & DynamoDB** ✅ **AWS Cognito for Authentication** ✅ **AWS SQS for Asynchronous Messaging** ✅ **AWS SES for Email Notifications** ✅ **Infrastructure as Code (IaC) with Terraform & Ansible** ---
+## 🚀 **Features**
+✅ **Automated AWS Infrastructure Provisioning**
+✅ **Terraform State Management with S3 & DynamoDB**
+✅ **AWS Cognito for Authentication**
+✅ **AWS SQS for Asynchronous Messaging**
+✅ **AWS SES for Email Notifications**
+✅ **Infrastructure as Code (IaC) with Terraform & Ansible**
+---
 
-## 🛠️ **Tech Stack** | **Technology** | **Description** |  
-|--------------|----------------|  
-| **Terraform** | Infrastructure as Code (IaC) |  
-| **Ansible** | Configuration Management |  
-| **AWS S3 & DynamoDB** | Terraform State Management |  
-| **AWS Cognito** | Authentication |  
-| **AWS SQS & SES** | Messaging & Email Services |  
-| **AWS ECS Fargate** | Containerized Microservices |  
+## 🛠️ **Tech Stack**
+| **Technology** | **Description** |
+|--------------|----------------|
+| **Terraform** | Infrastructure as Code (IaC) |
+| **Ansible** | Configuration Management |
+| **AWS S3 & DynamoDB** | Terraform State Management |
+| **AWS Cognito** | Authentication |
+| **AWS SQS & SES** | Messaging & Email Services |
+| **AWS ECS Fargate** | Containerized Microservices |
 
 ---
 
@@ -51,34 +62,42 @@ It includes:
 ```
 picbank-infra/
 │── ansible/
-│   ├── playbook.yaml          # Creates S3 & DynamoDB for Terraform state
-│   ├── playbook-destroy.yaml  # Destroys S3 & DynamoDB
-│   ├── hosts                  # Inventory file for Ansible
-│   ├── roles/                 # Ansible roles
-│   ├── requirements.txt       # Ansible dependencies
+│   ├── playbook.yml              # Creates S3 & DynamoDB for Terraform state
+│   ├── playbook-destroy.yml      # Destroys S3 & DynamoDB
+│   ├── hosts                     # Inventory file for Ansible
+│   ├── requirements.txt          # Ansible dependencies
+│   ├── setup.cfg                 # Ansible setup configuration
 │── terraform/
-│   ├── modules/               # Reusable Terraform modules
-│   │   ├── vpc/               # AWS VPC Configuration
-│   │   ├── iam/               # IAM Roles & Policies
-│   │   ├── ecr/               # AWS ECR for container images
-│   │   ├── ecs/               # AWS ECS Fargate configuration
-│   │   ├── sqs/               # AWS SQS Queues
-│   │   ├── ses/               # AWS SES Email Configuration
-│   │   ├── cognito/           # AWS Cognito User Pool
-│   ├── environment/
-│   │   ├── dev/               # Terraform variables for Dev
-│   │   ├── prod/              # Terraform variables for Prod
-│   ├── main.tf                # Terraform entry point
-│   ├── backend.tf             # Terraform backend configuration
-│   ├── variables.tf           # Variables used in Terraform
-│   ├── outputs.tf             # Outputs from Terraform
-│   ├── terraform.tfvars       # Variables for Terraform execution
-│── README.md                  # Documentation
+│   ├── backend.tf                # Terraform backend configuration
+│   ├── environments/
+│   │   ├── dev/                  # Terraform configuration for Dev environment
+│   │   ├── prod/                 # Terraform configuration for Prod environment
+│   ├── modules/                  # Reusable Terraform modules
+│   │   ├── cognito/              # AWS Cognito User Pool
+│   │   ├── ecr/                  # AWS ECR for container images
+│   │   ├── ecs/                  # AWS ECS Fargate configuration
+│   │   ├── iam/                  # IAM Roles & Policies
+│   │   ├── network/              # Network-related modules
+│   │   │   ├── internet-gateway/ # Internet Gateway configuration
+│   │   │   ├── nacl/             # Network ACL configuration
+│   │   │   ├── route-table/      # Route Table configuration
+│   │   │   ├── security-group/   # Security Group configuration
+│   │   │   ├── subnet/           # Subnet configuration
+│   │   │   ├── vpc/              # VPC configuration
+│   │   ├── ses/                  # AWS SES Email Configuration
+│   │   ├── sqs/                  # AWS SQS Queues
+│   ├── outputs.tf                # Outputs from Terraform
+│   ├── providers.tf              # Terraform provider configuration
+│   ├── variables.tf              # Variables used in Terraform
+│── LICENSE                       # Project license
+│── README.md                     # Documentation
+
 ```
 
 ---
 
-## ⚙️ **Infrastructure Details** The project provisions the following AWS resources:
+## ⚙️ **Infrastructure Details**
+The project provisions the following AWS resources:
 
 - **S3 & DynamoDB**: Stores Terraform state.
 - **VPC, Subnets, and Security Groups**: Network infrastructure.
@@ -91,108 +110,82 @@ picbank-infra/
 
 ---
 
-## 🏗️ **Setting Up the Environment** ### **1️⃣ Install Dependencies** Ensure you have the following installed:
+## 🏗️ **Setting Up the Environment**
+
+### **1️⃣ Install Dependencies**
+Ensure you have the following packages installed:
 
 - **Terraform** (`>= 1.6.0`)
 - **Ansible** (`>= 2.15.0`)
 - **AWS CLI** (`>= 2.0`)
 - **Python** (`>= 3.8`)
 
-> 🛠️ **Check versions:** ```sh
+> 🔎 **Verify Versions:**
+```sh
 terraform -v
 ansible --version
 aws --version
 python3 --version
 ```
 
-### **2️⃣ Create Ansible Virtual Environment**
-Navigate to the `ansible` directory and create a virtual environment:
-
-```sh
-cd ansible
-python3 -m venv ansible-venv
-source ansible-venv/bin/activate
-```
-
-### **3️⃣ Install Ansible Dependencies**
-Install the necessary Python packages using `requirements.txt`:
-
-```sh
-pip install -r requirements.txt
-```
-
-### **4️⃣ Run Ansible Playbooks**
-Execute Ansible playbooks as needed:
-
-```sh
-ansible-playbook -i hosts playbook.yaml
-```
-
-### **5️⃣ Deactivate Virtual Environment**
-After running Ansible, deactivate the virtual environment:
-
-```sh
-deactivate
-```
-
 ---
 
-## 🚀 **Provisioning the Infrastructure** ### **1️⃣ Create S3 & DynamoDB for Terraform State (via Ansible)** > 🛠️ **Run:** ```sh
+## 🚀 **Provisioning the Infrastructure**
+
+### **1️⃣ Create S3 & DynamoDB for Terraform State (via Ansible)**
+```sh
 cd ansible
 source ansible-venv/bin/activate
-ansible-playbook -i hosts playbook.yaml
+ansible-playbook -i hosts playbook.yml
 deactivate
 cd ..
 ```
 
----
-
-### **2️⃣ Initialize Terraform** > 🛠️ **Run:** ```sh
+### **2️⃣ Initialize Terraform**
+```sh
 cd terraform
 terraform init
 ```
 
----
-
-### **3️⃣ Validate Configuration** > 🛠️ **Run:** ```sh
+### **3️⃣ Validate Configuration**
+```sh
 terraform validate
 ```
 
----
-
-### **4️⃣ Plan the Infrastructure** > 🛠️ **Run:** ```sh
+### **4️⃣ Plan the Infrastructure**
+```sh
 terraform plan -out=tfplan
 ```
 
----
-
-### **5️⃣ Apply Changes & Deploy Resources** > 🛠️ **Run:** ```sh
+### **5️⃣ Apply and Create Resources**
+```sh
 terraform apply tfplan
 ```
 
----
-
-### **6️⃣ View Outputs (Resource Information)** > 🛠️ **Run:** ```sh
+### **6️⃣ View Outputs (Resource Information)**
+```sh
 terraform output
 ```
 
 ---
 
-## 🧹 **Destroying the Infrastructure** ### **1️⃣ Destroy AWS Resources (via Terraform)** > 🛠️ **Run:** ```sh
+## 🧹 **Destroying the Infrastructure**
+
+### **1️⃣ Remove AWS Resources (via Terraform)**
+```sh
 terraform destroy
 ```
 
----
-
-### **2️⃣ Destroy S3 & DynamoDB (via Ansible)** > 🛠️ **Run:** ```sh
+### **2️⃣ Remove S3 & DynamoDB (via Ansible)**
+```sh
 cd ansible
 source ansible-venv/bin/activate
-ansible-playbook -i hosts playbook-destroy.yaml
+ansible-playbook -i hosts playbook-destroy.yml
 deactivate
 cd ..
 ```
 
-Now, the entire infrastructure has been **removed**! 🧹
+✅ Now all the infrastructure has been **removed**! 🧹
 
 ---
 
@@ -215,12 +208,3 @@ This project is licensed under the Apache License - see the [LICENSE](LICENSE) f
 ## 📞 **Contact**
 📘 **LinkedIn:** [linkedin.com/in/antoniocesarlopes](https://linkedin.com/in/antoniocesarlopes)
 ```
-
-**Principais mudanças:**
-
-* Adicionei a seção "2️⃣ Create Ansible Virtual Environment" em "🏗️ Setting Up the Environment" para explicar como criar e ativar o ambiente virtual.
-* Adicionei a seção "3️⃣ Install Ansible Dependencies" para explicar como instalar as dependências do Ansible usando o `requirements.txt`.
-* Adicionei a seção "4️⃣ Run Ansible Playbooks" e "5️⃣ Deactivate Virtual Environment" para explicar como rodar o Ansible e depois desativar o ambiente virtual.
-* Modifiquei as seções "🚀 Provisioning the Infrastructure" e "🧹 Destroying the Infrastructure" para incluir
-
-teste
