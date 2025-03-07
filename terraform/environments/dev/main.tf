@@ -48,16 +48,6 @@ module "security_groups" {
   service_port = var.service_port
 }
 
-# Módulo de NACL (Network ACL)
-module "nacl" {
-  source           = "../../modules/network/nacl"
-  project          = var.project
-  environment      = var.environment
-  vpc_id           = module.vpc.vpc_id
-  public_subnet_ids = module.subnet.public_subnet_ids
-  allow_ssh        = false  # Alterar para true caso SSH seja necessário
-}
-
 # Módulo de IAM
 module "iam" {
   source  = "../../modules/iam"
