@@ -22,6 +22,30 @@ resource "aws_iam_role" "ecs_task_execution_role" {
   }
 }
 
+resource "aws_iam_policy" "ecr_access_policy" {
+  name        = "${var.project}-ecs-ecr-access"
+  description = "Permissões para o ECS acessar o ECR"
+  
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "ecr:GetAuthorizationToken",
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:DescribeRepositories",
+          "ecr:ListImages",
+          "ecr:BatchGetImage"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+
 # ================================
 # POLÍTICAS DE PERMISSÕES DA ROLE
 # ================================
@@ -34,6 +58,30 @@ resource "aws_iam_role_policy_attachment" "ecs_task_execution" {
 
 # Permite que a role tenha acesso completo aos logs do CloudWatch
 resource "aws_iam_role_policy_attachment" "ecs_task_cloudwatch_logs" {
-  role       = aws_iam_role.ecs_task_execution_role.name  # Associa à mesma role
+  role       = aws_iam_role.ecs_task_execution_role.name 
   policy_arn = "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"  # Permissão para escrita e leitura de logs no CloudWatch
+}
+
+# Permitir envio de emails via SES
+resource "aws_iam_role_policy_attachment" "ecs_task_ses_access" {
+  role       = aws_iam_role.ecs_task_execution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSESFullAccess"
+}
+
+# Permitir envio e recebimento de mensagens via SQS
+resource "aws_iam_role_policy_attachment" "ecs_task_sqs_access" {
+  role       = aws_iam_role.ecs_task_execution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSQSFullAccess"
+}
+
+# Permitir autenticação e autorização via Cognito
+resource "aws_iam_role_policy_attachment" "ecs_task_cognito_access" {
+  role       = aws_iam_role.ecs_task_execution_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonCognitoPowerUser"
+}
+
+# Permite obter imagens do repositório ECR.
+resource "aws_iam_role_policy_attachment" "ecs_task_ecr_access" {
+  role       = aws_iam_role.ecs_task_execution_role.name
+  policy_arn = aws_iam_policy.ecr_access_policy.arn
 }

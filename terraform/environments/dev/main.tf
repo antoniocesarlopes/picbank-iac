@@ -63,11 +63,11 @@ module "ecs" {
   source             = "../../modules/ecs"
   project            = var.project
   image_url          = module.ecr.repository_url
-  execution_role_arn = var.execution_role_arn
-  subnet_id         = module.subnet.public_subnet_id
+  execution_role_arn = module.iam.ecs_task_execution_role_arn
+  subnet_id          = module.subnet.public_subnet_id
   aws_region         = var.aws_region
   environment        = var.environment
-  security_group_ids = [module.security_groups.ecs_security_group_id]
+  security_group_id = module.security_groups.ecs_security_group_id
 }
 
 # Módulo do Cognito

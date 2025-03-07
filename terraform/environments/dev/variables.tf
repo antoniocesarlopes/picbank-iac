@@ -26,11 +26,6 @@ variable "environment" {
   type        = string
 }
 
-variable "execution_role_arn" {
-  description = "ARN do IAM Role de execução do ECS"
-  type        = string
-}
-
 variable "bucket_terraform_state" {
   description = "Nome do bucket S3 para armazenar o estado do Terraform"
   type        = string

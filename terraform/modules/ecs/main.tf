@@ -64,7 +64,7 @@ resource "aws_ecs_service" "auth_service" {
   network_configuration {
     subnets          = [var.subnet_id]  # subnet onde o serviço será executado
     assign_public_ip = true  # Garante que o serviço tenha um IP público para comunicação
-    security_groups  = var.security_group_ids  # Associar os security groups aqui
+    security_groups  = [var.security_group_id]  # Associar os security groups aqui
   }
 
   tags = {
