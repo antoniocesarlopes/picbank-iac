@@ -62,12 +62,22 @@ resource "aws_cognito_user_group" "standard_group" {
 resource "aws_cognito_user_pool_client" "picbank_client" {
   name                                 = "${var.project}-app-client"
   user_pool_id                         = aws_cognito_user_pool.picbank_user_pool.id
-  generate_secret                      = true
+  generate_secret                      = true  # Mantém o segredo do cliente
   allowed_oauth_flows_user_pool_client = true
   allowed_oauth_flows                  = ["code"]
   allowed_oauth_scopes                 = ["openid", "profile", "email"]
   callback_urls                         = [var.redirect_uri]
   supported_identity_providers         = ["COGNITO"]
+
+  # ✅ Permite login com email/usuário + senha e refresh token
+  explicit_auth_flows = [
+    "ALLOW_USER_PASSWORD_AUTH",
+    "ALLOW_REFRESH_TOKEN_AUTH",
+    "ALLOW_CUSTOM_AUTH"
+  ]
+
+  # ✅ Previne vazamento de informações sobre usuários inexistentes
+  prevent_user_existence_errors = "ENABLED"
 }
 
 # 🔗 Configuração da URL do Provedor Cognito
