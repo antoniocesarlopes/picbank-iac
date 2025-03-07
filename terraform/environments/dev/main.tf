@@ -16,8 +16,7 @@ module "subnet" {
   project         = var.project
   environment     = var.environment
   vpc_id          = module.vpc.vpc_id
-  public_subnets  = var.public_subnets
-  private_subnets = var.private_subnets
+  public_subnet  = var.public_subnet
 }
 
 # Módulo do Internet Gateway (IGW)
@@ -35,8 +34,7 @@ module "route_table" {
   environment         = var.environment
   vpc_id              = module.vpc.vpc_id
   internet_gateway_id = module.internet_gateway.internet_gateway_id
-  public_subnet_ids   = module.subnet.public_subnet_ids
-  private_subnet_ids  = module.subnet.private_subnet_ids
+  public_subnet_id    = module.subnet.public_subnet_id
 }
 
 # Módulo de Security Groups
@@ -66,7 +64,7 @@ module "ecs" {
   project            = var.project
   image_url          = module.ecr.repository_url
   execution_role_arn = var.execution_role_arn
-  subnet_ids         = module.subnet.public_subnet_ids
+  subnet_id         = module.subnet.public_subnet_id
   aws_region         = var.aws_region
   environment        = var.environment
   security_group_ids = [module.security_groups.ecs_security_group_id]

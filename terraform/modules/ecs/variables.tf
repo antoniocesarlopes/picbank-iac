@@ -11,9 +11,9 @@ variable "execution_role_arn" {
 }
 
 # Lista de subnets para o ECS
-variable "subnet_ids" {
-  description = "Lista de subnets onde os containers do ECS serão executados"
-  type        = list(string)
+variable "subnet_id" {
+  description = "subnet onde os containers do ECS serão executados"
+  type        = string
 }
 
 # Nome do projeto

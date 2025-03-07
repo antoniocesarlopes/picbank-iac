@@ -62,7 +62,7 @@ resource "aws_ecs_service" "auth_service" {
 
   # Configuração de rede para Fargate
   network_configuration {
-    subnets          = var.subnet_ids  # Lista de subnets onde o serviço será executado
+    subnets          = [var.subnet_id]  # subnet onde o serviço será executado
     assign_public_ip = true  # Garante que o serviço tenha um IP público para comunicação
     security_groups  = var.security_group_ids  # Associar os security groups aqui
   }

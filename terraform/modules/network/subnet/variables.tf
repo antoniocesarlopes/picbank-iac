@@ -13,12 +13,7 @@ variable "environment" {
   type        = string
 }
 
-variable "public_subnets" {
-  description = "Lista de blocos CIDR para as subnets públicas"
-  type        = list(string)
-}
-
-variable "private_subnets" {
-  description = "Lista de blocos CIDR para as subnets privadas"
-  type        = list(string)
+variable "public_subnet" {
+  description = "Bloco CIDR para a subnet pública"
+  type        = string
 }

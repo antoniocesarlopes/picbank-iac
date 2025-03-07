@@ -17,14 +17,8 @@ resource "aws_route" "public_internet_access" {
   gateway_id             = var.internet_gateway_id
 }
 
-# Associação da tabela de rotas pública às subnets públicas
-resource "aws_route_table_association" "public" {
-  subnet_id      = aws_subnet.public.id
-  route_table_id = aws_route_table.public.id
-}
-
 # Associar a route table à única subnet pública
 resource "aws_route_table_association" "public" {
-  subnet_id      = aws_subnet.public.id
+  subnet_id      = var.public_subnet_id
   route_table_id = aws_route_table.public.id
 }
