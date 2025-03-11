@@ -49,3 +49,24 @@ output "cognito_jwk_set_uri" {
   value       = module.cognito.jwk_set_uri
   description = "AWS Cognito JWK Set URI"
 }
+
+output "repository_url" {
+  value       = module.ecr.repository_url
+  description = "Repository URL for ECR"
+}
+
+output "ecs_cluster_name" {
+  description = "Cluster ECS name"
+  value       = module.ecs.ecs_cluster_name
+}
+
+output "ecs_service_name" {
+  description = "ECS service name"
+  value       = module.ecs.ecs_service_name
+}
+
+# ARN do IAM Role de execução do ECS
+output "execution_role_arn" {
+  description = "ARN da IAM Role usada pelo ECS para execução de tarefas"
+  value    = module.ecs.execution_role_arn
+}

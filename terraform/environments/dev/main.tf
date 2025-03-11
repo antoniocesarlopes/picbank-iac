@@ -58,18 +58,6 @@ module "ecr" {
   project = var.project  
 }
 
-# Módulo de ECS
-module "ecs" {
-  source             = "../../modules/ecs"
-  project            = var.project
-  image_url          = module.ecr.repository_url
-  execution_role_arn = module.iam.ecs_task_execution_role_arn
-  subnet_id          = module.subnet.public_subnet_id
-  aws_region         = var.aws_region
-  environment        = var.environment
-  security_group_id = module.security_groups.ecs_security_group_id
-}
-
 # Módulo do Cognito
 module "cognito" {
   source       = "../../modules/cognito"
@@ -92,4 +80,34 @@ module "sqs" {
   project               = var.project
   aws_region            = var.aws_region
   sqs_wait_time_seconds = var.sqs_wait_time_seconds
+}
+
+# Módulo do ECS
+module "ecs" {
+  source             = "../../modules/ecs"
+  project            = var.project
+  image_url          = module.ecr.repository_url
+  execution_role_arn = module.iam.ecs_task_execution_role_arn
+  subnet_id          = module.subnet.public_subnet_id
+  aws_region         = var.aws_region
+  environment        = var.environment
+  security_group_id  = module.security_groups.ecs_security_group_id
+
+  # Cognito
+  cognito_user_pool_id  = module.cognito.user_pool_id
+  cognito_client_id     = module.cognito.app_client_id
+  cognito_client_secret = module.cognito.app_client_secret
+  cognito_issuer_uri    = module.cognito.issuer_uri
+  cognito_jwk_set_uri   = module.cognito.jwk_set_uri
+
+  # SQS
+  sqs_queue_url = module.sqs.sqs_queue_url
+  sqs_dlq_url   = module.sqs.sqs_dlq_url
+
+  # SES
+  ses_sender_email = module.ses.ses_sender_email
+
+  # Variáveis sensíveis
+  aws_access_key_id     = var.aws_access_key_id
+  aws_secret_access_key = var.aws_secret_access_key
 }

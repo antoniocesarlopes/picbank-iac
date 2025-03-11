@@ -37,3 +37,58 @@ variable "security_group_id" {
   description = "ID do grupo de segurança para o serviço ECS"
   type        = string
 }
+
+# Cognito
+variable "cognito_user_pool_id" {
+  description = "ID do User Pool do AWS Cognito"
+  type        = string
+}
+
+variable "cognito_client_id" {
+  description = "ID do Client do AWS Cognito"
+  type        = string
+}
+
+variable "cognito_client_secret" {
+  description = "Client Secret do AWS Cognito"
+  type        = string
+}
+
+variable "cognito_issuer_uri" {
+  description = "Issuer URI do AWS Cognito"
+  type        = string
+}
+
+variable "cognito_jwk_set_uri" {
+  description = "JWK Set URI do AWS Cognito"
+  type        = string
+}
+
+# SQS
+variable "sqs_queue_url" {
+  description = "URL da fila do SQS"
+  type        = string
+}
+
+variable "sqs_dlq_url" {
+  description = "URL da Dead Letter Queue do SQS"
+  type        = string
+}
+
+# SES
+variable "ses_sender_email" {
+  description = "Email do remetente configurado no SES"
+  type        = string
+}
+
+variable "aws_access_key_id" {
+  description = "AWS Access Key ID"
+  type        = string
+  sensitive = true
+}
+
+variable "aws_secret_access_key" {
+  description = "AWS Secret Access Key"
+  type        = string
+  sensitive = true
+}
