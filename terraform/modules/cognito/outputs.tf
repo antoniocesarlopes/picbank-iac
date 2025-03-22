@@ -17,3 +17,8 @@ output "jwk_set_uri" {
   description = "JWK Set URI para autenticação"
   value       = "https://cognito-idp.${var.aws_region}.amazonaws.com/${aws_cognito_user_pool.picbank_user_pool.id}/.well-known/jwks.json"
 }
+
+output "cognito_user_pool_arn" {
+  description = "ARN do User Pool Cognito"
+  value       = "arn:aws:cognito-idp.${var.aws_region}:${data.aws_caller_identity.current.account_id}:userpool/${aws_cognito_user_pool.picbank_user_pool.id}"
+}

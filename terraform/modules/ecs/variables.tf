@@ -11,9 +11,9 @@ variable "execution_role_arn" {
 }
 
 # Lista de subnets para o ECS
-variable "subnet_id" {
-  description = "subnet onde os containers do ECS serão executados"
-  type        = string
+variable "subnet_ids" {
+  description = "Lista de subnets onde os containers do ECS serão executados"
+  type        = list(string)
 }
 
 # Nome do projeto
@@ -59,18 +59,43 @@ variable "cognito_issuer_uri" {
   type        = string
 }
 
+variable "cognito_user_pool_arn" {
+  description = "ARN do User Pool Cognito"
+  type        = string
+}
+
 variable "cognito_jwk_set_uri" {
   description = "JWK Set URI do AWS Cognito"
   type        = string
 }
 
 # SQS
-variable "sqs_queue_url" {
+variable "sqs_queue_url_user_data_request" {
   description = "URL da fila do SQS"
   type        = string
 }
 
-variable "sqs_dlq_url" {
+variable "sqs_dlq_url_user_data_request" {
+  description = "URL da Dead Letter Queue do SQS"
+  type        = string
+}
+
+variable "sqs_queue_url_user_group_assignment" {
+  description = "URL da fila do SQS"
+  type        = string
+}
+
+variable "sqs_dlq_url_user_group_assignment" {
+  description = "URL da Dead Letter Queue do SQS"
+  type        = string
+}
+
+variable "sqs_queue_url_user_data_response" {
+  description = "URL da fila do SQS"
+  type        = string
+}
+
+variable "sqs_dlq_url_user_data_response" {
   description = "URL da Dead Letter Queue do SQS"
   type        = string
 }

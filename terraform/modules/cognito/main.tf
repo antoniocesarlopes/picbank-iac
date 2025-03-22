@@ -85,3 +85,5 @@ resource "aws_cognito_user_pool_domain" "picbank_domain" {
   domain       = "${var.project}-auth"
   user_pool_id = aws_cognito_user_pool.picbank_user_pool.id
 }
+
+data "aws_caller_identity" "current" {}

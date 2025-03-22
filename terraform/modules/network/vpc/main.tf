@@ -10,6 +10,7 @@ resource "aws_vpc" "main" {
 
   tags = {
     Name        = "${var.project}-vpc"  # Nome da VPC para fácil identificação no console da AWS.
-    Environment = var.environment       # Tag de ambiente (dev, prod, etc.).
+    Environment = var.environment
+    ManagedBy   = "Terraform"
   }
 }

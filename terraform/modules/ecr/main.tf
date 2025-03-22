@@ -13,6 +13,7 @@ resource "aws_ecr_repository" "auth_service" {
 
   tags = {
     Name        = "${var.project}-auth-service"
-    Environment = "dev"  # Define o ambiente
+    Environment = var.environment
+    ManagedBy   = "Terraform"
   }
 }

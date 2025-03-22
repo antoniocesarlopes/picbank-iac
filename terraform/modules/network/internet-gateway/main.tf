@@ -9,5 +9,6 @@ resource "aws_internet_gateway" "this" {
   tags = {
     Name        = "${var.project}-igw"
     Environment = var.environment
+    ManagedBy   = "Terraform"
   }
 }

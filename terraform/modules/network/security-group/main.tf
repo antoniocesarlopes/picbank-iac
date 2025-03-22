@@ -7,6 +7,7 @@ resource "aws_security_group" "ecs" {
   tags = {
     Name        = "${var.project}-ecs-sg"
     Environment = var.environment
+    ManagedBy   = "Terraform"
   }
 }
 

@@ -16,7 +16,7 @@ module "subnet" {
   project         = var.project
   environment     = var.environment
   vpc_id          = module.vpc.vpc_id
-  public_subnet  = var.public_subnet
+  public_subnets  = var.public_subnets
 }
 
 # Módulo do Internet Gateway (IGW)
@@ -34,7 +34,7 @@ module "route_table" {
   environment         = var.environment
   vpc_id              = module.vpc.vpc_id
   internet_gateway_id = module.internet_gateway.internet_gateway_id
-  public_subnet_id    = module.subnet.public_subnet_id
+  public_subnet_ids   = [module.subnet.public_subnet1_id, module.subnet.public_subnet2_id]
 }
 
 # Módulo de Security Groups
@@ -50,12 +50,14 @@ module "security_groups" {
 module "iam" {
   source  = "../../modules/iam"
   project = var.project
+  environment  = var.environment
 }
 
 # Módulo de ECR
 module "ecr" {
   source  = "../../modules/ecr"
   project = var.project  
+  environment  = var.environment
 }
 
 # Módulo do Cognito
@@ -88,7 +90,7 @@ module "ecs" {
   project            = var.project
   image_url          = module.ecr.repository_url
   execution_role_arn = module.iam.ecs_task_execution_role_arn
-  subnet_id          = module.subnet.public_subnet_id
+  subnet_ids         = [module.subnet.public_subnet1_id, module.subnet.public_subnet2_id]
   aws_region         = var.aws_region
   environment        = var.environment
   security_group_id  = module.security_groups.ecs_security_group_id
@@ -99,10 +101,16 @@ module "ecs" {
   cognito_client_secret = module.cognito.app_client_secret
   cognito_issuer_uri    = module.cognito.issuer_uri
   cognito_jwk_set_uri   = module.cognito.jwk_set_uri
+  cognito_user_pool_arn = module.cognito.cognito_user_pool_arn
 
-  # SQS
-  sqs_queue_url = module.sqs.sqs_queue_url
-  sqs_dlq_url   = module.sqs.sqs_dlq_url
+  # 🎯 Configuração das filas SQS
+  sqs_queue_url_user_data_request      = module.sqs.sqs_queue_url_user_data_request
+  sqs_queue_url_user_group_assignment  = module.sqs.sqs_queue_url_user_group_assignment
+  sqs_queue_url_user_data_response     = module.sqs.sqs_queue_url_user_data_response
+
+  sqs_dlq_url_user_data_request        = module.sqs.sqs_dlq_url_user_data_request
+  sqs_dlq_url_user_group_assignment    = module.sqs.sqs_dlq_url_user_group_assignment
+  sqs_dlq_url_user_data_response       = module.sqs.sqs_dlq_url_user_data_response
 
   # SES
   ses_sender_email = module.ses.ses_sender_email

@@ -18,7 +18,7 @@ variable "internet_gateway_id" {
   type        = string
 }
 
-variable "public_subnet_id" {
-  description = "ID da subnet pública"
-  type        = string
+variable "public_subnet_ids" {
+  description = "Lista de IDs das subnets públicas"
+  type        = list(string)
 }

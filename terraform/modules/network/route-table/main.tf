@@ -7,6 +7,7 @@ resource "aws_route_table" "public" {
   tags = {
     Name        = "${var.project}-public-route-table"
     Environment = var.environment
+    ManagedBy   = "Terraform"
   }
 }
 
@@ -17,8 +18,9 @@ resource "aws_route" "public_internet_access" {
   gateway_id             = var.internet_gateway_id
 }
 
-# Associar a route table à única subnet pública
+# Associação da tabela de rotas pública às subnets públicas
 resource "aws_route_table_association" "public" {
-  subnet_id      = var.public_subnet_id
+  count          = length(var.public_subnet_ids)
+  subnet_id      = var.public_subnet_ids[count.index]
   route_table_id = aws_route_table.public.id
 }
